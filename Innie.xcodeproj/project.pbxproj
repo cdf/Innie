@@ -376,7 +376,7 @@
 				MODULE_NAME = com.cdf.Innie;
 				MODULE_START = "$(PRODUCT_NAME)_kern_start";
 				MODULE_STOP = "$(PRODUCT_NAME)_kern_stop";
-				MODULE_VERSION = 1.2.1;
+				MODULE_VERSION = 1.2.2;
 				OTHER_CFLAGS = (
 					"-mmmx",
 					"-msse",
@@ -426,7 +426,7 @@
 				MODULE_NAME = com.cdf.Innie;
 				MODULE_START = "$(PRODUCT_NAME)_kern_start";
 				MODULE_STOP = "$(PRODUCT_NAME)_kern_stop";
-				MODULE_VERSION = 1.2.1;
+				MODULE_VERSION = 1.2.2;
 				OTHER_CFLAGS = (
 					"-mmmx",
 					"-msse",
