@@ -1,7 +1,7 @@
 Innie
 =====
 
-A [Lilu](https://github.com/acidanthera/Lilu) plugin for making PCIe drives appear as internal. The plugin is compatible with Lilu 1.2.0 or later.
+A [Lilu](https://github.com/acidanthera/Lilu) plugin for making PCIe drives appear as internal. The plugin is compatible with Lilu 1.4.1 or later.
   
 #### Configuration
 
