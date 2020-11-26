@@ -260,7 +260,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = x86_64;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++1y";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -300,8 +299,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				KERNEL_EXTENSION_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
-				KERNEL_FRAMEWORK_HEADERS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -311,7 +308,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = x86_64;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++1y";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -347,8 +343,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				KERNEL_EXTENSION_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
-				KERNEL_FRAMEWORK_HEADERS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -360,7 +354,7 @@
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1.0.0;
+				CURRENT_PROJECT_VERSION = 1.2.1;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DEVELOPMENT_TEAM = "";
 				GCC_ENABLE_FLOATING_POINT_LIBRARY_CALLS = NO;
@@ -372,19 +366,19 @@
 					"$(inherited)",
 				);
 				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/Lilu.kext/Contents/Resources";
-				INFOPLIST_FILE = "$(SRCROOT)/NightShiftEnabler/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Innie/Info.plist";
 				KERNEL_EXTENSION_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
 				KERNEL_FRAMEWORK_HEADERS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
 				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
 					"$(PROJECT_DIR)/MacKernelSDK/Library/x86_64",
+					"$(inherited)",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MARKETING_VERSION = 1.0.0;
-				MODULE_NAME = com.cdf.NightShiftEnabler;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MARKETING_VERSION = 1.2.1;
+				MODULE_NAME = com.cdf.Innie;
 				MODULE_START = "$(PRODUCT_NAME)_kern_start";
 				MODULE_STOP = "$(PRODUCT_NAME)_kern_stop";
-				MODULE_VERSION = 1.0.0;
+				MODULE_VERSION = 1.2.1;
 				OTHER_CFLAGS = (
 					"-mmmx",
 					"-msse",
@@ -396,13 +390,11 @@
 					"-fno-non-call-exceptions",
 					"-fno-builtin",
 					"-fno-asynchronous-unwind-tables",
-					"-Wno-unknown-warning-option",
-					"-Wno-ossharedptr-misuse",
-					"-Wno-vla",
 				);
 				OTHER_LDFLAGS = "-static";
-				PRODUCT_BUNDLE_IDENTIFIER = "$(MODULE_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdf.Innie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = kext;
 			};
 			name = Debug;
@@ -413,7 +405,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.0.0;
+				CURRENT_PROJECT_VERSION = 1.2.1;
 				DEAD_CODE_STRIPPING = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DEVELOPMENT_TEAM = "";
@@ -425,20 +417,20 @@
 					"PRODUCT_NAME=$(PRODUCT_NAME)",
 				);
 				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/Lilu.kext/Contents/Resources";
-				INFOPLIST_FILE = "$(SRCROOT)/NightShiftEnabler/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Innie/Info.plist";
 				KERNEL_EXTENSION_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
 				KERNEL_FRAMEWORK_HEADERS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
 				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
 					"$(PROJECT_DIR)/MacKernelSDK/Library/x86_64",
+					"$(inherited)",
 				);
 				LLVM_LTO = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MARKETING_VERSION = 1.0.0;
-				MODULE_NAME = com.cdf.NightShiftEnabler;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MARKETING_VERSION = 1.2.1;
+				MODULE_NAME = com.cdf.Innie;
 				MODULE_START = "$(PRODUCT_NAME)_kern_start";
 				MODULE_STOP = "$(PRODUCT_NAME)_kern_stop";
-				MODULE_VERSION = 1.0.0;
+				MODULE_VERSION = 1.2.1;
 				OTHER_CFLAGS = (
 					"-mmmx",
 					"-msse",
@@ -450,13 +442,11 @@
 					"-fno-non-call-exceptions",
 					"-fno-builtin",
 					"-fno-asynchronous-unwind-tables",
-					"-Wno-unknown-warning-option",
-					"-Wno-ossharedptr-misuse",
-					"-Wno-vla",
 				);
 				OTHER_LDFLAGS = "-static";
-				PRODUCT_BUNDLE_IDENTIFIER = "$(MODULE_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdf.Innie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRIP_STYLE = "non-global";
 				WRAPPER_EXTENSION = kext;
 			};
