@@ -35,7 +35,7 @@ PluginConfiguration ADDPR(config) {
     bootargBeta,
     1,
     KernelVersion::MountainLion,
-    KernelVersion::Catalina,
+    KernelVersion::BigSur,
     []() {
        innie.init();
     }
