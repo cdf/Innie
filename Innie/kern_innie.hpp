@@ -8,7 +8,7 @@
 #ifndef kern_innie_hpp
 #define kern_innie_hpp
 
-// #include <Library/LegacyIOService.h>
+#include <Library/LegacyIOService.h>
 #include <IOKit/IODeviceTreeSupport.h>
 
 class INNIE {
