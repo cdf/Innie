@@ -15,9 +15,9 @@
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>$(MODULE_VERSION)</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>$(MODULE_VERSION)</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>IOKitPersonalities</key>
 	<dict>
 		<key>com.cdf.Innie</key>
@@ -36,24 +36,12 @@
 	</dict>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2020 cdf. All rights reserved.</string>
-	<key>OSBundleCompatibleVersion</key>
-	<string>1.0</string>
 	<key>OSBundleLibraries</key>
 	<dict>
-		<key>as.vit9696.Lilu</key>
-		<string>1.2.0</string>
-		<key>com.apple.kpi.bsd</key>
-		<string>12.0.0</string>
-		<key>com.apple.kpi.dsep</key>
-		<string>12.0.0</string>
 		<key>com.apple.kpi.iokit</key>
-		<string>12.0.0</string>
+		<string>9.0.0</string>
 		<key>com.apple.kpi.libkern</key>
-		<string>12.0.0</string>
-		<key>com.apple.kpi.mach</key>
-		<string>12.0.0</string>
-		<key>com.apple.kpi.unsupported</key>
-		<string>12.0.0</string>
+		<string>9.0.0</string>
 	</dict>
 	<key>OSBundleRequired</key>
 	<string>Root</string>
