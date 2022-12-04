@@ -11,23 +11,21 @@
 
 #include "Innie.hpp"
 
-#define super IOService
-
 OSDefineMetaClassAndStructors(Innie, IOService)
 
 bool Innie::init(OSDictionary *dict) {
-    if (!super::init())
+    if (!IOService::init())
         return false;
     
     return true;
 }
 
 void Innie::free(void) {
-    super::free();
+    IOService::free();
 }
 
 IOService *Innie::probe(IOService *provider, SInt32 *score) {
-    if (super::probe(provider, score)==0)
+    if (IOService::probe(provider, score)==0)
         return 0;
     
     return this;
@@ -36,43 +34,47 @@ IOService *Innie::probe(IOService *provider, SInt32 *score) {
 bool Innie::start(IOService *provider) {
     DBGLOG("starting\n");
     
-    if (!super::start(provider))
+    if (!IOService::start(provider))
         return false;
     
     processRoot();
-    super::registerService();
+    IOService::registerService();
     return true;
 }
 
 void Innie::stop(IOService *provider) {
-    super::stop(provider);
+    IOService::stop(provider);
 }
 
+
 void Innie::processRoot() {
-    if (auto entry = IORegistryEntry::fromPath("/AppleACPIPlatformExpert", gIOServicePlane)) {
+    if (auto entry = IORegistryEntry::fromPath("/", gIODTPlane)) {
         IORegistryEntry *pciRoot = nullptr;
+        bool ready = false, found = false;
         size_t repeat = 0;
-        bool found = false;
-        
         do {
-            if (auto iterator = entry->getChildIterator(gIOServicePlane)) {
+            if (auto iterator = entry->getChildIterator(gIODTPlane)) {
                 while ((pciRoot = OSDynamicCast(IORegistryEntry, iterator->getNextObject())) != nullptr) {
                     const char *name = pciRoot->getName();
                     if (name && !strncmp("PC", name, 2)) {
-                        found = true;
-                        DBGLOG("found PCI root %s", pciRoot->getName());
-                        while (OSDynamicCast(OSBoolean, pciRoot->getProperty("IOPCIConfigured")) != kOSBooleanTrue) {
-                            DBGLOG("waiting for PCI root to be configured");
-                            IOSleep(1);
+                        if (ready) {
+                            DBGLOG("found PCI root %s", pciRoot->getName());
+                            found = true;
+                            while (OSDynamicCast(OSBoolean, pciRoot->getProperty("IOPCIConfigured")) != kOSBooleanTrue) {
+                                DBGLOG("waiting for PCI root to be configured");
+                                IOSleep(10);
+                            }
+                            recurseBridge(pciRoot);
+                        } else {
+                            IOSleep(1000); // Wait for other roots
+                            ready = true;
+                            break;
                         }
-                        recurseBridge(pciRoot);
                     }
                 }
                 iterator->release();
             }
         } while (repeat++ < 0x10000000 && !found);
-        
-        DBGLOG("found PCI root in %lu attempts", repeat);
         entry->release();
     }
 }
@@ -98,9 +100,9 @@ void Innie::recurseBridge(IORegistryEntry *entry) {
                     }
                     if (code == classCode::PCIBridge) {
                         DBGLOG("found bridge %s", childEntry->getName());
-                        while (OSDynamicCast(OSBoolean, childEntry->getProperty("IOPCIResourced")) != kOSBooleanTrue) {
-                            DBGLOG("waiting for bridge to be resourced");
-                            IOSleep(1);
+                        while (OSDynamicCast(OSBoolean, childEntry->getProperty("IOPCIConfigured")) != kOSBooleanTrue) {
+                            DBGLOG("waiting for PCI bridge to be configured");
+                            IOSleep(10);
                         }
                         recurseBridge(childEntry);
                     }
@@ -110,17 +112,17 @@ void Innie::recurseBridge(IORegistryEntry *entry) {
         iterator->release();
     }
 }
-                                    
+       
 void Innie::internalizeDevice(IORegistryEntry *entry) {
     DBGLOG("adding built-in property");
-    
     setBuiltIn(entry);
     
-    // Stop if entry is not yet resourced
-    if (OSDynamicCast(OSBoolean, entry->getProperty("IOPCIResourced")) != kOSBooleanTrue)
-        return;
+    while (OSDynamicCast(OSBoolean, entry->getProperty("IOPCIResourced")) != kOSBooleanTrue) {
+        DBGLOG("waiting for device to be resourced");
+        IOSleep(10);
+    }
     
-    // Otherwise update existing properties
+    // Proceed to update other properties
     if (auto driverIterator = IORegistryIterator::iterateOver(entry, gIOServicePlane, kIORegistryIterateRecursively)) {
         IORegistryEntry *driverEntry = nullptr;
         while ((driverEntry = OSDynamicCast(IORegistryEntry, driverIterator->getNextObject())) != nullptr) {
